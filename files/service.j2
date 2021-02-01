@@ -1,0 +1,51 @@
+#!/bin/bash
+
+action=${1:-'status'}
+
+function start(){
+    echo "starting airflow {{env|capitalize}} webserver"  
+    systemctl start airflow{{env}}-webserver
+
+    echo "starting airflow {{env|capitalize}} scheduler"
+    systemctl start airflow{{env}}-scheduler
+
+    echo "starting airflow {{env|capitalize}} worker"
+    systemctl start airflow{{env}}-worker
+}
+
+function stop(){
+    echo "stopping airflow {{env|capitalize}} webserver"  
+    systemctl stop airflow{{env}}-webserver
+
+    echo "stopping airflow {{env|capitalize}} scheduler"
+    systemctl stop airflow{{env}}-scheduler
+
+    echo "stopping airflow {{env|capitalize}} worker"
+    systemctl stop airflow{{env}}-worker
+}
+
+function status(){
+    systemctl status airflow{{env}}-webserver
+    systemctl status airflow{{env}}-scheduler
+    systemctl status airflow{{env}}-worker
+}
+
+if [ $action == "start" ]
+then
+    start
+
+elif [ $action == "stop" ]
+then
+    stop
+
+elif [ $action == "restart" ]
+then
+    stop 
+    start
+    
+elif [ $action == "status" ]
+then
+    status
+else
+    echo "invalid command (start|stop|restart|status)"
+fi

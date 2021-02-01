@@ -1,0 +1,18 @@
+[Unit]
+Description=Airflow-{{env}} webserver daemon
+After=network.target postgresql-10.service
+Wants=postgresql-10.service
+[Service]
+EnvironmentFile=/opt/airflow/{{env}}/.env
+User=root
+Group=root
+Type=simple
+ExecStart=/bin/bash -c 'source /opt/airflow/{{env}}/.env;source /opt/airflow/{{env}}/venv/bin/activate;airflow webserver --pid /run/airflow/webserver-{{env}}.pid'
+Restart=on-failure
+RestartSec=5s
+PrivateTmp=true
+[Install]
+WantedBy=multi-user.target
+[Service]
+RuntimeDirectory=airflow
+RuntimeDirectoryMode=0775

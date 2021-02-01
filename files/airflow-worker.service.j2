@@ -1,0 +1,14 @@
+[Unit]
+Description=Airflow-{{env}} celery worker daemon
+After=network.target postgresql-10.service
+Wants=postgresql-10.service
+[Service]
+EnvironmentFile=/opt/airflow/{{env}}/.env
+User=root
+Group=root
+Type=simple
+ExecStart=/bin/bash -c 'export C_FORCE_ROOT=True;source /opt/airflow/{{env}}/.env;source /opt/airflow/{{env}}/venv/bin/activate;airflow worker'
+Restart=on-failure
+RestartSec=10s
+[Install]
+WantedBy=multi-user.target
