@@ -7,7 +7,7 @@ EnvironmentFile=/opt/airflow/{{env}}/.env
 User=root
 Group=root
 Type=simple
-ExecStart=/bin/bash -c 'export C_FORCE_ROOT=True;source /opt/airflow/{{env}}/.env;source /opt/airflow/{{env}}/venv/bin/activate;airflow worker'
+ExecStart=/bin/bash -c 'export C_FORCE_ROOT=True;source /opt/airflow/{{env}}/.env;source /opt/airflow/venv/bin/activate;airflow worker'
 Restart=on-failure
 RestartSec=10s
 [Install]
