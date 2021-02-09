@@ -9,8 +9,8 @@ https://perfecto25.medium.com/runnig-airflow-on-separate-environments-592f023f02
 
 create new SIM environment (separate from Prod)
 
-    mkdir /opt/airflow/sim 
-    cd /opt/airflow/sim
+    mkdir /opt/airflow/
+    cd /opt/airflow
     python3.6 -m virtualenv venv
     source venv/bin/activate
     pip install apache-airflow['postgres']
@@ -32,8 +32,8 @@ Initialize DB (leave virtualenv)
     /opt/airflow/sim> source .env
     
     # now init virtualenv
-    /opt/airflow/sim> source venv/bin/activate
-    (venv) /opt/airflow/sim> airflow db init
+    /opt/airflow> source venv/bin/activate
+    (venv) /opt/airflow> airflow db init
 
 
 Create Fernet key (update airflow.cfg with Fernet key)
