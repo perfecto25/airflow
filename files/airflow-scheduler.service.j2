@@ -7,7 +7,7 @@ EnvironmentFile=/opt/airflow/{{env}}/.env
 User=root
 Group=root
 Type=simple
-ExecStart=/bin/bash -c 'source /opt/airflow/{{env}}/.env;source /opt/airflow/{{env}}/venv/bin/activate;airflow scheduler'
+ExecStart=/bin/bash -c 'source /opt/airflow/{{env}}/.env;source /opt/airflow/venv/bin/activate;airflow scheduler'
 Restart=always
 RestartSec=5s
 [Install]
